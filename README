@@ -1,6 +1,6 @@
 unit_tests.sh - bash script that allows you to run multiple tests for angles from 1 to N (N le 30, default value 30). For your N value just enter the first argument to the script, e.g. script.sh 10 
 
-unit_testing.ipynb - Jupyter file  which consists to cells, first one is to calculate angles for angles.txt file, second one is to analyse data from forceCoeffs(Cl, Cd)
+unit_testing.ipynb - Jupyter file  which consists to cells, first one is to calculate angles for data.txt file, second one is to analyse data from forceCoeffs(Cl, Cd)
 
 data.txt - file with drag & lift for testing different angles of attack
 

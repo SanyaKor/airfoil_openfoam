@@ -37,7 +37,15 @@ else
 fi
 
 
-readarray angles_array < angles.txt   
+declare -a drag_array
+declare -a lift_array
+
+# Чтение файла и заполнение массивов
+while IFS=$'\t' read -r col1 col2; do
+    # Добавляем строки в массивы
+    drag_array+=("$col1")
+    lift_array+=("$col2")
+done < "./angles.txt"      
 
 command=$(cp ./angles.txt ./AIRFOIL_TESTS/TESTS${curr_tests_amount}_${current_date_time}/)
 echo $command
@@ -45,10 +53,19 @@ echo $command
 for (( test_case=0; test_case<tests_amount; test_case++ ))
 do     
     
-    current_angle=${angles_array[$test_case]}
+    current_angle=${drag_array[$test_case]}
+    current_lift=${lift_array[$test_case]}
     
-    command=$(sed -i "/internalField   uniform/c \\${current_angle}"  ./0/U)
+    #command=$(sed -i "/internalField   uniform/c $current_angle"  ./0/U)
+    command=$(sed -i "s/\(internalField   uniform \).*/\1 $current_angle/" ./0/U)
     echo -n $command
+
+    command=$(sed -i "s/\(liftDir     \).*/\1 $current_lift/" ./system/controlDict)
+    echo -n $command
+
+    command=$(sed -i "s/\(dragDir     \).*/\1 $current_angle/" ./system/controlDict)
+    echo -n $command
+
 
     echo "TEST_CASE $test_case"
     simpleFoam &> /dev/null   

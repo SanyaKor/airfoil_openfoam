@@ -45,9 +45,9 @@ while IFS=$'\t' read -r col1 col2; do
     # Добавляем строки в массивы
     drag_array+=("$col1")
     lift_array+=("$col2")
-done < "./angles.txt"      
+done < "./data.txt"      
 
-command=$(cp ./angles.txt ./AIRFOIL_TESTS/TESTS${curr_tests_amount}_${current_date_time}/)
+command=$(cp ./data.txt ./AIRFOIL_TESTS/TESTS${curr_tests_amount}_${current_date_time}/)
 echo $command
 
 for (( test_case=0; test_case<tests_amount; test_case++ ))

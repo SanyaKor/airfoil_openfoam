@@ -8,7 +8,7 @@ AIRFOIL_TESTS - folder with tests, eg TESTSN_date with all forceCoeffs .dat file
 
 cleaner.sh - bash script that works nearly like an ./Allclean
 
-RUNNING pipeline : (if u delete angles.txt file) unit_testing.ipynb (first cell) -> unit_tests.sh -> unit_testing.ipynb (second cell)
+RUNNING pipeline : (if u delete data.txt file) unit_testing.ipynb (first cell) -> unit_tests.sh -> unit_testing.ipynb (second cell)
 
 ++++++++++++++++++++++++++++++++++++++
 Folder blockMeshGen - files blockMeshGen.ipynb Jupyter script allows to create my own blockMesh file, and it also works quite good with this solver. But I got some odd values for CL function like 10^75 from some tests, that's why I leaving my block mesh here and using the other blockMesh with +- good params. 

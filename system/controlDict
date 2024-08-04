@@ -1,0 +1,146 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     simpleFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   50;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    momErr
+    {
+        type            momentumError;
+        libs            (fieldFunctionObjects);
+        executeControl  writeTime;
+        writeControl    writeTime;
+    }
+
+    contErr
+    {
+        type            div;
+        libs            (fieldFunctionObjects);
+        field           phi;
+        executeControl  writeTime;
+        writeControl    writeTime;
+    }
+
+
+    turbulenceFields1
+    {
+        type            turbulenceFields;
+        libs            (fieldFunctionObjects);
+        fields
+        (
+            k
+            epsilon
+            nut
+            nuEff
+            R
+            devReff
+            L
+            I
+        );
+
+        executeControl  writeTime;
+        writeControl    writeTime;
+    }
+
+    mag1
+    {
+        type            mag;
+        libs            (fieldFunctionObjects);
+        field           turbulenceProperties:R;
+
+        result          magR;
+        executeControl  writeTime;
+        writeControl    writeTime;
+    }
+
+
+
+forces
+    {
+        type        forces;
+        functionObjectLibs ( "libforces.so" );  // lib to load
+        outputControl timeStep;
+        outputInterval 1;
+        patches
+        (
+            wall  // change to your patch name
+        );
+        // name of fields
+        pName       p;
+        UName       U;
+        log         true; // dump to file
+	rho rhoInf;
+        rhoInf      1025;
+        CofR        ( 0 0 0 );
+    }
+ forcesCoeffs
+    {
+        type        forceCoeffs;
+        functionObjectLibs ( "libforces.so" );  // lib to load
+        outputControl timeStep;
+        outputInterval 1;
+        patches
+        (
+            wall  
+        );
+        // name of fields
+        pName       p;
+        UName       U;
+        log         true; // dump to file
+	rho rhoInf;
+        rhoInf      1025;
+        CofR        ( 0 0 0 );
+        liftDir     ( 0 1 0 );
+        dragDir     ( 1 0 0 );
+        pitchAxis   ( 0 0 0 );
+        magUInf     7.30;
+        lRef        0.319;
+        Aref        0.001595;
+    }
+
+}
+
+
+// ************************************************************************* //

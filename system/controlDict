@@ -129,13 +129,15 @@ forces
         pName       p;
         UName       U;
         log         true; // dump to file
+	liftDir      (-0.49999999999999994 0.8660254037844387 0);
+	dragDir      (0.8660254037844387 0.49999999999999994 0);
+        magUInf     1;
+        
+	pitchAxis   ( 0 0 0 );
 	rho rhoInf;
         rhoInf      1025;
         CofR        ( 0 0 0 );
-	liftDir      (-0.49999999999999994 0.8660254037844387 0);
-	dragDir      (0.8660254037844387 0.49999999999999994 0);
-        pitchAxis   ( 0 0 0 );
-        magUInf     1;
+	
         lRef        0.319;
         Aref        0.001595;
     }

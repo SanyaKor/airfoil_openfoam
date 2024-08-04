@@ -2,7 +2,7 @@ unit_tests.sh - bash script that allows you to run multiple tests for angles fro
 
 unit_testing.ipynb - Jupyter file  which consists to cells, first one is to calculate angles for angles.txt file, second one is to analyse data from forceCoeffs(Cl, Cd)
 
-angles.txt - file of angles for testing different angles of attack
+data.txt - file with drag & lift for testing different angles of attack
 
 AIRFOIL_TESTS - folder with tests, eg TESTSN_date with all forceCoeffs .dat files inside and with angles which necessary for calculation. For instance, after running unit_tests.sh 10 u will get TESTSN_date with 10 .dat files for each simulation + 1 angles file.
 
